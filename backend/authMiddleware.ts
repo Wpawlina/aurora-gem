@@ -20,17 +20,22 @@ if (!SECRET_KEY_ACCESS) {
 const AuthorizedMiddleware:RequestHandler = (req:CustomerRequest, res:Response, next:NextFunction): void => {
     const { authorization } = req.headers;
     if (!authorization) {
-        res.status(401).json({ message: 'Unauthorized' });
+        console.log('No authorization header',req.headers,req.headers.authorization);
+        res.status(401).json({ message: 'Unauthorized ' });
         return;
     }
     const token = authorization.split(' ')[1];
     try{
+        
         const customer = jwt.verify(token, SECRET_KEY_ACCESS) as CustomerInterface;
         req.customer = customer;
+        console.log('Customer:', customer);
         next();
     }
     catch(err){
-        res.status(403).json({ error: 'Invalid token'});
+        console.error('Invalid token', err);
+        res.status(401).json({ error: 'Invalid token'});
+        
     }
   
 };

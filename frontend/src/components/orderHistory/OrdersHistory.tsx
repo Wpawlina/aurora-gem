@@ -1,10 +1,12 @@
 import { Divider } from "@mui/material";
 import OrdersHistoryList from "./OrdersHistoryList";
 import authAPI from "../../helpers/authAPI";
-import { useEffect, useState } from "react";
+import { useEffect, useState,useRef } from "react";
 import OrderDto from "./interfaces/OrderDto";
 import userAuthenticated from "../../helpers/userAuthenticated";
 import getCustomerInfo from "../../helpers/getCustomerInfo";
+import gsap from "gsap";
+
 
 export default function OrderHistory() {
   const [orderHistory, setOrderHistory] = useState<OrderDto[]>([]);
@@ -27,8 +29,16 @@ export default function OrderHistory() {
     }
     fetchCustomerOrders()
   }, []);
+
+  const listRef=useRef(null)
+  useEffect(() => {
+    gsap.fromTo(listRef.current, 
+      { opacity: 0,  x: -30 }, 
+      { opacity: 1,  x:0,duration: .5 }
+    );
+  }, []);
   return (
-    <div className="m-2 flex flex-col gap-2">
+    <div ref={listRef} className="m-2 flex flex-col gap-2">
       <div className="font-4xl">Your order history</div>
       <Divider />
       <div>

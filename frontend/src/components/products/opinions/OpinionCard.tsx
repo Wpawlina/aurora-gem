@@ -46,7 +46,7 @@ export default function OpinionCard({ opinion,callbacks,userOpinion }: { opinion
         onDisagree={()=>setIsAlertOpen(false)}
         />
     {isEdited?<EditOpinionCard opinion={opinion} onClose={onCloseClick}/>:
-    <Card sx={{ minWidth: 500 }}>
+    <Card sx={{ minWidth: 200 }}>
       <CardHeader
         className="flex justify-start items-center pb-0"
         avatar={

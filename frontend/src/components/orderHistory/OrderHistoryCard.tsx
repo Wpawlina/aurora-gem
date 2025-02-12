@@ -52,7 +52,7 @@ function OrderProduct({ productOrder }: { productOrder: OrderDetailsDto }) {
   return (
     <>
       {orderedProduct ? (
-        <div className="flex gap-4 m-2 items-center">
+        <div className="flex gap-y-4 my-2 items-center justify-between w-full max-w-full flex-wrap">
           <div>
             <img className="w-32 h-32" src={orderedProduct.image.url} alt="" />
           </div>
@@ -65,7 +65,7 @@ function OrderProduct({ productOrder }: { productOrder: OrderDetailsDto }) {
             <div>{orderedProduct.quantity} pieces</div>
           </div>
           <div className="text-large font-bold">
-            <div>{orderedProduct.price * orderedProduct.quantity} zł</div>
+            <div>{(orderedProduct.price * orderedProduct.quantity).toFixed(2)} $</div>
           </div>
         </div>
       ) : (
@@ -77,7 +77,7 @@ function OrderProduct({ productOrder }: { productOrder: OrderDetailsDto }) {
 
 export default function OrderHistoryCard({ order }: { order: OrderDto }) {
   return (
-    <Paper className="flex flex-col">
+    <Paper className="flex flex-col w-full max-w-full ">
       {/* Dane zamowienia */}
       <div className="flex items-center gap-4 m-1">
       <CheckIcon className="text-3xl"/>
@@ -98,9 +98,9 @@ export default function OrderHistoryCard({ order }: { order: OrderDto }) {
       <Divider />
       <div className="flex gap-2 m-4 text-xl items-center justify-end">
         <div className="text-large">Summary:</div>
-        <div className="font-bold">{order.totalPrice} zł</div>
+        <div className="font-bold">{order.totalPrice.toFixed(2)} $</div>
         <div className="text-sm">with shipment </div>
-        <div className="font-bold text-base">{order.totalPrice + order.shipment} zł</div>
+        <div className="font-bold text-base">{(order.totalPrice + order.shipment).toFixed(2)} $</div>
       </div>
     </Paper>
   );

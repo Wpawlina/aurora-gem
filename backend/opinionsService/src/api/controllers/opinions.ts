@@ -19,6 +19,7 @@ export const getByProductId = async (id: number) => {
           content: v.content,
           stars: v.stars,
           productId: v.product_id,
+          customerId: v.customer_id,
         };
       })
     );

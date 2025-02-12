@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express";
 import { getByCustomerId, getByOrderId, postOrder } from "../controllers/orders";
-import AuthorizedMiddleware from "./../../authMiddleware"
+import AuthorizedMiddleware from "./../../../../authMiddleware"
 export const ordersRouter = Router();
 
 interface CustomerRequest extends Request {

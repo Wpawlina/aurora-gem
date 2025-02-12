@@ -7,7 +7,7 @@ import {
   updateOpinion,
   deleteOpinion,
 } from "../controllers/opinions";
-import AuthorizedMiddleware from "./../../authMiddleware"
+import AuthorizedMiddleware from "./../../../../authMiddleware"
 
 interface CustomerRequest extends Request {
   customer?: {

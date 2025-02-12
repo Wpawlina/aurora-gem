@@ -5,8 +5,8 @@ export default function CartOrderCard({
 }: {
   product: OrderedProduct;
 }) {
-  return <Container className="flex gap-4 m-2 items-center">
-    <div><img className="w-32 h-32" src={product.image.url} alt="" /></div>
+  return <Container className="flex gap-4 m-2 items-center  justify-between w-full max-w-full flex-wrap">
+    <div ><img className="w-32 h-32" src={product.image.url} alt="" /></div>
     <div className="flex flex-col">
         <div className="text-2xl font-bold">{product.name}</div>
         <Divider/>
@@ -16,7 +16,7 @@ export default function CartOrderCard({
         <div>{product.quantity} pieces</div>
     </div>
     <div className="text-large font-bold">
-        <div >{product.price*product.quantity} zł</div>
+        <div >{(product.price*product.quantity).toFixed(2)} $</div>
     </div>
   </Container>;
 }

@@ -96,7 +96,7 @@ app.post('/api/refresh', async (req:Request, res:Response) => {
             return;
         }
 
-        const accessToken = jwt.sign({ email: customer.email, id: customer.id ,is_admin:customer.is_admin}, SECRET_KEY_ACCESS, { expiresIn: ACCESS_TOKEN_EXPIRES });
+        const accessToken = jwt.sign({ email: customer.email, id: customer.id ,is_admin:customer.is_admin}, SECRET_KEY_ACCESS, { expiresIn: Number(ACCESS_TOKEN_EXPIRES) });
         res.status(200).json({ accessToken: accessToken });
     } catch (err) {
         res.status(403).json({message:'Invalid token'});

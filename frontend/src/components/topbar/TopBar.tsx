@@ -28,7 +28,7 @@ const TopBar = () => {
   };
 
   return (
-    <div className="flex flex-col items-center space-y-4 p-4 ">
+    <div className="flex flex-col items-center space-y-4 pt-4 ">
       <div className="w-full flex flex-col md:flex-row justify-between items-center max-w-[1280px] mx-auto">
         <div className="flex items-center w-full md:w-auto mb-4 md:mb-0">
           <Paper component="form" className=" flex items-center w-full md:w-64">

@@ -2,7 +2,8 @@ import Button from "@mui/material/Button";
 import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useNavigate, Link} from "react-router-dom";
-
+import { useEffect,useRef } from "react";
+import gsap from "gsap";
 
 
 interface InnputValues {
@@ -13,6 +14,14 @@ interface InnputValues {
 const LoginPage = () => {
   const initialValues: InnputValues = { email: "", password: "" };
   const navigate = useNavigate();
+  const formRef = useRef(null);
+
+  useEffect(() => {
+    gsap.fromTo(formRef.current, 
+      { opacity: 0,  x: -30 }, 
+      { opacity: 1,  x:0,duration: .5 }
+    );
+  }, []);
 
 
   const handleSubmit = async (
@@ -49,7 +58,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center space-y-4 p-4">
+    <div ref={formRef} className="flex flex-col items-center space-y-4 p-4">
       <h2>
         Sign in to <img className="h-5" src="/src/assets/logo.png" />
       </h2>

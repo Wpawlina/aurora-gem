@@ -9,7 +9,7 @@ export default function CartOrdersList({
 }) {
   return (
     <div>
-      <div className="flex flex-col">
+      <div className="flex flex-col w-full max-w-full  ">
         {products.map((dto, index) => {
           return (
             <div key={index}>

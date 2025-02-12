@@ -18,3 +18,5 @@ npm-debug.log
 
 backend/db_data/*.sock
 backend/db_data/*.log
+
+package-lock.json

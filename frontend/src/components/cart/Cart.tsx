@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import CartOrdersList from "./CartOrdersList";
 import authAPI from "../../helpers/authAPI";
 import ProductDto from "../products/dto/ProductDto";
@@ -7,6 +7,8 @@ import { Alert, Button } from "@mui/material";
 import SentimentDissatisfiedIcon from "@mui/icons-material/SentimentDissatisfied";
 import CheckIcon from "@mui/icons-material/Check";
 import userAuthenticated from "../../helpers/userAuthenticated";
+import gsap from "gsap";
+import { useNavigate } from "react-router-dom";
 
 interface OrderedProductsReq {
   productId: number;
@@ -33,6 +35,7 @@ function mapToOrderedProduct(
 }
 
 async function fetchProducts(ids: [number, number][]) {
+
   const products = await Promise.all(
     ids.map(async ([id, quantity]) => {
       try {
@@ -75,6 +78,8 @@ export default function Cart() {
     showError: false,
     message: "",
   });
+  const listRef = useRef(null);
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchCartItems = async () => {
       const keys: [number, number][] = Object.keys(localStorage)
@@ -99,6 +104,14 @@ export default function Cart() {
       setTotalPrice(_totalPrice);
       setTotalQuantity(_totalQuantity);
     }
+  }, [selectedProducts]);
+
+  useEffect(() => {
+    gsap.fromTo(
+      listRef.current,
+      { opacity: 0, x: -30 },
+      { opacity: 1, x: 0, duration: 0.5 }
+    );
   }, [selectedProducts]);
 
   async function handleOnClickMakeOrder() {
@@ -167,20 +180,21 @@ export default function Cart() {
         </Alert>
       )}
       {hasProducts ? (
-        <div className="flex gap-5 items-center">
+        <div ref={listRef} className="flex flex-col-reverse lg:flex-row gap-5 items-center">
           <div>
             <CartOrdersList products={selectedProducts} />
           </div>
           <div>
             <div>Number of items: {totalQuantity}</div>
-            <div>Cost of shipment: {Math.max(totalPrice / 10, 20)}</div>
+            <div>Cost of shipment: {(Math.max(totalPrice / 10, 20)).toFixed(2)}$</div>
             <div>
               Total Price:{" "}
               <p className="text-xl font-bold">
-                {totalPrice + Math.max(totalPrice / 10, 20)} zł
+                {(totalPrice + Math.max(totalPrice / 10, 20)).toFixed(2)} $
               </p>
             </div>
             <div>
+              
               <Button
                 variant="contained"
                 onClick={() => handleOnClickMakeOrder()}
@@ -188,10 +202,21 @@ export default function Cart() {
                 Make order
               </Button>
             </div>
+            <div>
+              
+              <Button
+                sx={{ mt: 2 , backgroundColor:"red"}}
+                variant="contained"
+                onClick={() =>{emptyCart(); navigate("/");}}
+              >
+               Empty cart
+              </Button>
+            </div>
+           
           </div>
         </div>
       ) : (
-        <div className="mt-10 text-3xl">
+        <div ref={listRef} className="mt-10 text-3xl">
           <p>No products in cart</p>
           <SentimentDissatisfiedIcon className="text-9xl" />
         </div>

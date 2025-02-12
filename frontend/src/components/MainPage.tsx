@@ -1,6 +1,8 @@
 import { Paper } from "@mui/material";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
+import gsap from "gsap";
+import { useEffect, useRef } from "react";
 function srcset(image: string, size: number, rows = 1, cols = 1) {
   return {
     src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
@@ -11,53 +13,64 @@ function srcset(image: string, size: number, rows = 1, cols = 1) {
 }
 
 const MainPage = () => {
+
+  const paperRef=useRef(null)
+
+  useEffect(() => {
+    gsap.fromTo(paperRef.current, 
+      { opacity: 0,  y: -50 }, 
+      { opacity: 1,  y:0,duration: 1 }
+    );
+  }, []);
+
+
   const itemData = [
     {
-      img: "https://aurora-gem-images-bucket.s3.eu-north-1.amazonaws.com/pics/rings/jewelery-2.avif",
+      img: "https://aurora-gem.s3.eu-north-1.amazonaws.com/gold-necklace-with-an-elegant-pendant.webp",
 
       title: "jewelery",
       rows: 3,
       cols: 2,
     },
     {
-      img: "https://aurora-gem-images-bucket.s3.eu-north-1.amazonaws.com/pics/rings/jewelery-1.avif",
+      img: "https://aurora-gem.s3.eu-north-1.amazonaws.com/gold-ring-with-a-diamond.webp",
     },
     {
-      img: "https://aurora-gem-images-bucket.s3.eu-north-1.amazonaws.com/pics/rings/jewelery-3.avif",
+      img: "https://aurora-gem.s3.eu-north-1.amazonaws.com/gold_rose_brooch.png",
     },
     {
-      img: "https://aurora-gem-images-bucket.s3.eu-north-1.amazonaws.com/pics/rings/jewelery-4.avif",
+      img: "https://aurora-gem.s3.eu-north-1.amazonaws.com/women's-diamond-watch.webp",
 
       cols: 2,
       rows: 3,
     },
     {
-      img: "https://aurora-gem-images-bucket.s3.eu-north-1.amazonaws.com/pics/rings/jewelery-5.avif",
+      img: "https://aurora-gem.s3.eu-north-1.amazonaws.com/diamond-stud-earrings.webp",
 
       cols: 2,
       rows: 2,
     },
     {
-      img: "https://aurora-gem-images-bucket.s3.eu-north-1.amazonaws.com/pics/rings/jewelery-6.avif",
+      img: "https://aurora-gem.s3.eu-north-1.amazonaws.com/silver-ring-with-a-vibrant-red-ruby.webp",
 
       rows: 3,
       cols: 2,
     },
     {
-      img: "https://aurora-gem-images-bucket.s3.eu-north-1.amazonaws.com/pics/bracelets/jewelery-6.avif",
+      img: "https://aurora-gem.s3.eu-north-1.amazonaws.com/gold-pendant-with-sapphire.webp",
 
       cols: 2,
       rows: 3,
     },
   ];
   return (
-    <Paper className="flex flex-col items-center justify-center bg-slate-50 m-4 p-8">
-      <h1 className="text-lg md:text-5xl font-serif italic font-light underline underline-offset-8 ">
+    <Paper ref={paperRef} className="flex flex-col items-center justify-center bg-slate-50 m-4 p-8 w-full max-w-full">
+      <h1 className=" text-md lg:text-5xl font-serif italic font-light  underline-offset-8 w-full text-center">
         Inspired by the Aurora, Designed for You.{" "}
       </h1>
-      <div className="hidden md:block p-3">
+      <div className="hidden lg:block p-3 ">
         <ImageList
-          sx={{ width: 1000, height: 1200 }}
+          sx={{ width: 1000, height: 1200, overflow: "hidden" }}
           variant="quilted"
           cols={4}
           rowHeight={121}
@@ -68,7 +81,7 @@ const MainPage = () => {
               key={item.img}
               cols={item.cols || 1}
               rows={item.rows || 1}
-                className="border-2 border-slate-700 px-2 transition ease-in-out delay-150 hover:scale-110 hover:rounded-md"
+                className="border-2 border-slate-700 px-2 transition ease-in-out delay-150 hover:scale-110 hover:rounded-md  "
             >
               <img
                 {...srcset(item.img, 121, item.rows, item.cols)}
@@ -80,25 +93,30 @@ const MainPage = () => {
           ))}
         </ImageList>
       </div>
-      <div className="md:hidden">
-        <img
-          src="https://aurora-gem-images-bucket.s3.eu-north-1.amazonaws.com/pics/rings/jewelery-2.avif"
+      <div className="lg:hidden w-fit flex flex-wrap gap-y-4 md:p-4 justify-center">
+        <img 
+          className="w-[100%] hover:scale-110 transition ease-in-out delay-150 rounded-md" 
+          src="https://aurora-gem.s3.eu-north-1.amazonaws.com/gold-necklace-with-an-elegant-pendant.webp"
+          alt="jewelery"
+        />
+        <img 
+          className="w-[100%] hover:scale-110 transition ease-in-out delay-150 rounded-md" 
+          src="https://aurora-gem.s3.eu-north-1.amazonaws.com/gold-ring-with-a-diamond.webp"
           alt="jewelery"
         />
         <img
-          src="https://aurora-gem-images-bucket.s3.eu-north-1.amazonaws.com/pics/rings/jewelery-1.avif"
+          className="w-[100%] hover:scale-110 transition ease-in-out delay-150 rounded-md" 
+          src="https://aurora-gem.s3.eu-north-1.amazonaws.com/gold_rose_brooch.png"
           alt="jewelery"
         />
         <img
-          src="https://aurora-gem-images-bucket.s3.eu-north-1.amazonaws.com/pics/bracelets/jewelery-6.avif"
+          className="w-[100%] hover:scale-110 transition ease-in-out delay-150 rounded-md" 
+          src="https://aurora-gem.s3.eu-north-1.amazonaws.com/women's-diamond-watch.webp"
           alt="jewelery"
         />
         <img
-          src="https://aurora-gem-images-bucket.s3.eu-north-1.amazonaws.com/pics/rings/jewelery-5.avif"
-          alt="jewelery"
-        />
-        <img
-          src="https://aurora-gem-images-bucket.s3.eu-north-1.amazonaws.com/pics/rings/jewelery-6.avif"
+          className="w-[100%] hover:scale-110 transition ease-in-out delay-150 rounded-md" 
+          src="https://aurora-gem.s3.eu-north-1.amazonaws.com/silver-ring-with-a-vibrant-red-ruby.webp"
           alt="jewelery"
         />
       </div>
