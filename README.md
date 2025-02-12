@@ -15,9 +15,11 @@ The application is designed with a **microservices architecture**, ensuring scal
 The primary technologies used in this project are:
 - **React**
 - **Express**
+- **Sequelize**
+- **MySql**
 - **TypeScript (TS)**
 - **Material UI**
-- **Tailwind**
+- **TailwindCSS**
 - **Formik**
 - **GSAP**
 
